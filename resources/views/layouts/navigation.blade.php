@@ -9,6 +9,12 @@
                     <x-nav-link :href="route('weather')" :active="request()->routeIs('weather')">
                         {{ __('Weather') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('preferences.edit')" :active="request()->routeIs('preferences.edit')">
+                        {{ __('Preferences') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                        {{ __('Account') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -28,9 +34,19 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                        <x-dropdown-link :href="route('weather')">
+                            {{ __('Weather') }}
                         </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('preferences.edit')">
+                            {{ __('Preferences') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Account') }}
+                        </x-dropdown-link>
+
+                        
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

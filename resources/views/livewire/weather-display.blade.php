@@ -9,7 +9,7 @@
 
     @if(!is_string($data))
         <div class="p-8"> 
-        <!-- TODO implement user prefs -->
+        <!-- TODO implement $windUnit and $pressureUnit -->
 
             <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
                 {{$data->location->name}}, {{$data->location->region}}
@@ -17,7 +17,8 @@
             
             <img src="{{$data->current->condition->icon}}" alt="{{$data->current->condition->text}}"/>
             <span class="ms-2">
-                {{$data->current->condition->text}} {{$data->current->temp_f}}&degF
+                {{$data->current->condition->text}} 
+                {{$tempUnit == 'F' ? $data->current->temp_f : $data->current->temp_c}}&deg {{$tempUnit}}
             </span>
 
             <div>
@@ -30,7 +31,10 @@
                         <ul>
                             <li><b>Wind:</b> {{$data->current->wind_dir}} at {{$data->current->wind_mph}} mph</li>
                             <li><b>Wind Gusts:</b> {{$data->current->gust_mph}} mph</li>
-                            <li><b>Wind Chill:</b> {{$data->current->windchill_f}} mph</li>
+                            <li>
+                                <b>Wind Chill:</b>
+                                {{$tempUnit == 'F' ? $data->current->windchill_f : $data->current->windchill_c}}&deg {{$tempUnit}}
+                            </li>
                         </ul>
                     </div>
 
@@ -38,7 +42,10 @@
                         <ul>
                             <li><b>Pressure:</b> {{$data->current->pressure_in}} in</li>
                             <li><b>Humidity:</b> {{$data->current->humidity}}%</li>
-                            <li><b>Dew Point:</b> {{$data->current->dewpoint_f}}&degF</li>
+                            <li>
+                                <b>Dew Point:</b> 
+                                {{$tempUnit == 'F' ? $data->current->dewpoint_f : $data->current->dewpoint_c}}&deg {{$tempUnit}}
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -60,9 +67,11 @@
                                     alt="{{$day->day->condition->text}}" 
                                     class="m-auto"/>
                                 {{$day->day->condition->text}} 
-                                <span class="text-xl font-extrabold">{{$day->day->maxtemp_f}}&degF</span>
+                                <span class="text-xl font-extrabold">                        
+                                    {{$tempUnit == 'F' ? $day->day->maxtemp_f : $day->day->maxtemp_c}}&deg {{$tempUnit}}
+                                </span>
                                 /
-                                {{$day->day->mintemp_f}}&degF
+                                {{$tempUnit == 'F' ? $day->day->mintemp_f : $day->day->mintemp_c}}&deg {{$tempUnit}}
                                 Wind: {{$day->day->maxwind_mph}} mph
                             </div>
                         </div>
