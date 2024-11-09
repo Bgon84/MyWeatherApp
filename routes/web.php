@@ -6,14 +6,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if(Auth::check()){
-        return view('dashboard', ['data' => null]);
+        return view('weather/index', ['data' => null]);
     }
     return view('auth/login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard', ['data' => null]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/weather', function () {
+    return view('weather/index', ['data' => null]);
+})->middleware(['auth', 'verified'])->name('weather');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

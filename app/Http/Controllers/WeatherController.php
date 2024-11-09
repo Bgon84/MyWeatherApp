@@ -10,12 +10,11 @@ class WeatherController extends Controller
    public function getWeather(Request $request)
    {
         $request->validate([
-            'location' => ['required'],
-            'days' => ['required']
+            'location' => ['required']
         ]);
 
         $data = WeatherAPIService::getWeather($request['location'], $request['days']);
 
-        return response()->view('dashboard', ['data' => $data]);
+        return response()->view('weather/index', ['data' => $data]);
    }
 }
