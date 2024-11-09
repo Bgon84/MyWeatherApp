@@ -15,13 +15,13 @@ class WeatherDisplay extends Component
     {
         $preferences = UserPreferencesService::getUserPreferences(Auth::user()->id);
 
-        $this->location = $preferences->favorite_location ?? '';
+        $this->location = $preferences->favorite_location ?? $this->location;
 
         $data = ($this->location !== '') ? WeatherAPIService::getWeather($this->location, '5') : '';
         
         $tempUnit = $preferences->temp_metric == 1 ? 'C' : 'F';
         $windUnit = $preferences->wind_metric == 1 ? 'kph' : 'mph';
-        $pressureUnit = $preferences->pressure_millibar == 1 ? 'mb' : 'in';
+        $pressureUnit = $preferences->pressure_millibar == 1 ? 'mb' : 'inHg';
 
         return view('livewire.weather-display', compact(
             'data',

@@ -11,7 +11,7 @@
         <div class="p-8"> 
         <!-- TODO implement $windUnit and $pressureUnit -->
 
-            <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
+            <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
                 {{$data->location->name}}, {{$data->location->region}}
             </h2>
             
@@ -29,8 +29,15 @@
                 <div class="p-6 grid grid-cols-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <div>                
                         <ul>
-                            <li><b>Wind:</b> {{$data->current->wind_dir}} at {{$data->current->wind_mph}} mph</li>
-                            <li><b>Wind Gusts:</b> {{$data->current->gust_mph}} mph</li>
+                            <li>
+                                <b>Wind:</b> 
+                                {{$data->current->wind_dir}} at
+                                {{$windUnit == 'kph' ? $data->current->wind_kph : $data->current->wind_mph}} {{$windUnit}}
+                            </li>
+                            <li>
+                                <b>Wind Gusts:</b>
+                                {{$windUnit == 'kph' ? $data->current->gust_kph : $data->current->gust_mph}} {{$windUnit}}
+                            </li>
                             <li>
                                 <b>Wind Chill:</b>
                                 {{$tempUnit == 'F' ? $data->current->windchill_f : $data->current->windchill_c}}&deg {{$tempUnit}}
@@ -40,8 +47,14 @@
 
                     <div>
                         <ul>
-                            <li><b>Pressure:</b> {{$data->current->pressure_in}} in</li>
-                            <li><b>Humidity:</b> {{$data->current->humidity}}%</li>
+                            <li>
+                                <b>Pressure:</b>
+                                {{$pressureUnit == 'mb' ? $data->current->pressure_mb : $data->current->pressure_in}} {{$pressureUnit}}
+                            </li>
+                            <li>
+                                <b>Humidity:</b> 
+                                {{$data->current->humidity}}%
+                            </li>
                             <li>
                                 <b>Dew Point:</b> 
                                 {{$tempUnit == 'F' ? $data->current->dewpoint_f : $data->current->dewpoint_c}}&deg {{$tempUnit}}
@@ -72,7 +85,8 @@
                                 </span>
                                 /
                                 {{$tempUnit == 'F' ? $day->day->mintemp_f : $day->day->mintemp_c}}&deg {{$tempUnit}}
-                                Wind: {{$day->day->maxwind_mph}} mph
+                                Wind:
+                                {{$windUnit == 'kph' ? $day->day->maxwind_kph : $day->day->maxwind_mph}} {{$windUnit}}
                             </div>
                         </div>
                     @endforeach

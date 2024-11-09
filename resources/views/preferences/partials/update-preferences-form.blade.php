@@ -16,7 +16,7 @@
         <div>
             <x-input-label for="favorite_location" :value="__('Favorite Location')" />
             <x-text-input id="favorite_location" name="favorite_location" type="text" class="mt-1 block w-full" 
-            value="{{$preferences->favorite_location}}" required autofocus autocomplete="name" />
+            value="{{$preferences->favorite_location}}" autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('favorite_location')" />
         </div>
 
