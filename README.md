@@ -15,10 +15,15 @@ Clone the example .env file into your own.
 
 ```
 cp .env.example .env
-vi .env
 ```
 
-Set *WEATHER_API_KEY* to your API Key from [Weather API](https://www.weatherapi.com/).
+Open .env and set *WEATHER_API_KEY* to your API Key from [Weather API](https://www.weatherapi.com/).
+
+Run migrations to setup Database:
+
+```
+php artisan migrate:fresh
+```
 
 Generate an App Key and start the server:
 
